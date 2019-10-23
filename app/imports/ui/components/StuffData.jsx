@@ -59,9 +59,9 @@ export default withTracker(() => {
   let tableTwo = {};
   let tableThree = {};
   if (subscription.ready() && subscription2.ready() && subscription3.ready()) {
-    tableOne = DataTableOne.find({ _id: "TLuRyysJNwQBx2oX4" }).fetch();
-    tableTwo = DataTableTwo.find({ _id: "5KE78w6dtxdwdpQcF" }).fetch();
-    tableThree = DataTableThree.find({ _id: "EDzgg72Tkgh3PdinN" }).fetch();
+    tableOne = DataTableOne.find({}).fetch();
+    tableTwo = DataTableTwo.find({}).fetch();
+    tableThree = DataTableThree.find({}).fetch();
   }
 
   return {
