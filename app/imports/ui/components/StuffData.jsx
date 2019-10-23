@@ -15,11 +15,12 @@ class StuffData extends React.Component {
   }
 
   renderComponent() {
+    // Prints out all table objects
     console.log(this.props.one);
     console.log(this.props.two);
     console.log(this.props.three);
 
-    // Prints out all keys of one
+    // Prints out all keys of table one
     const keys = _.without(_.keys(this.props.one), "_id");
     console.log(keys);
 
@@ -31,6 +32,7 @@ class StuffData extends React.Component {
     console.log(data);
     console.log(data2);
 
+    // Does nothing to the page
     return <div></div>;
   }
 
@@ -43,6 +45,7 @@ class StuffData extends React.Component {
   }
 }
 
+// All props used for this component
 StuffData.propTypes = {
   one: PropTypes.object.isRequired,
   two: PropTypes.object.isRequired,
@@ -65,6 +68,7 @@ export default withTracker(() => {
   }
 
   return {
+    // Returns the entire array, [0] since we want the object
     one: tableOne[0],
     two: tableTwo[0],
     three: tableThree[0],
