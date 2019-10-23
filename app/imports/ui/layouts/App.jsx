@@ -20,6 +20,7 @@ import NotFound from "../pages/NotFound";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import Signout from "../pages/Signout";
+import StuffData from "../components/StuffData";
 // import StuffGraph from "../components/StuffGraph";
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -29,7 +30,7 @@ class App extends React.Component {
       <Router>
         <div>
           <NavBar />
-          {/* <StuffGraph /> */}
+          <StuffData />
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route path="/signin" component={Signin} />
