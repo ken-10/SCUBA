@@ -23,6 +23,7 @@ import Signout from "../pages/Signout";
 import StuffData from "../components/StuffData";
 // import StuffGraph from "../components/StuffGraph";
 
+
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
   render() {
@@ -45,6 +46,7 @@ class App extends React.Component {
           <Footer />
         </div>
       </Router>
+
     );
   }
 }
