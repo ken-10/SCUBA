@@ -1,0 +1,19 @@
+.landing-background {
+  background: url('images/scuba-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  padding-bottom: 750px;
+}
+
+.main-text {
+  color: white;
+  font-size: 50px;
+  padding-top: 100px;
+  text-shadow: 1px 1px 2px #000000;
+}
+
+
+.sub-main-text {
+  color: white;
+  font-size: 40px;
+  text-shadow: 1px 1px 2px #000000;
+}
