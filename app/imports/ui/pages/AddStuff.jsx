@@ -54,7 +54,16 @@ class AddStuff extends React.Component {
 
   /** On submit, insert the data. */
   submitDive() {
-
+    const dive = {
+      depth: this.state.depth,
+      time: this.state.time,
+      pressureGroup1: this.state.pressureGroup1,
+      pressureGroup2: this.state.pressureGroup2,
+      plannedSI: this.state.plannedSI,
+      RNT: this.state.RNT,
+      actualBT: this.state.actualBT,
+      totalBT: this.state.totalBT,
+    };
   }
 
   calculate() {
