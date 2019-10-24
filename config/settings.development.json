@@ -4,6 +4,15 @@
     { "email": "john@foo.com", "password": "changeme" }
   ],
 
+  "defaultProfiles": [
+    {
+      "firstName": "John",
+      "lastName": "Foo",
+      "dives": [],
+      "owner": "john@foo.com"
+    }
+  ],
+
   "defaultData": [
     {
       "name": "Basket",
