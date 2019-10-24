@@ -31,7 +31,7 @@ class App extends React.Component {
       <Router>
         <div>
           <NavBar />
-          <StuffData />
+          {/*<StuffData />*/}
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route path="/signin" component={Signin} />

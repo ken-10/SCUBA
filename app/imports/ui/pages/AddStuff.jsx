@@ -1,15 +1,16 @@
 import React from 'react';
-import { Stuffs, StuffSchema } from '/imports/api/stuff/stuff';
-import { Grid, Segment, Header } from 'semantic-ui-react';
-import AutoForm from 'uniforms-semantic/AutoForm';
-import TextField from 'uniforms-semantic/TextField';
-import NumField from 'uniforms-semantic/NumField';
-import SelectField from 'uniforms-semantic/SelectField';
-import SubmitField from 'uniforms-semantic/SubmitField';
+import { DataTableOne } from '/imports/api/data/dataTableOne';
+import { DataTableTwo } from '/imports/api/data/dataTableTwo';
+import { DataTableThree } from '/imports/api/data/dataTableThree';
+import { Grid, Header, Container, Form, Loader } from 'semantic-ui-react';
 import HiddenField from 'uniforms-semantic/HiddenField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+
+const _ = require('underscore');
 
 /** Renders the Page for adding a document. */
 class AddStuff extends React.Component {
@@ -20,6 +21,21 @@ class AddStuff extends React.Component {
     this.submit = this.submit.bind(this);
     this.insertCallback = this.insertCallback.bind(this);
     this.formRef = null;
+    this.state = {
+      depth: '',
+      time: '',
+      pressureGroup1: '',
+      pressureGroup2: '',
+      plannedSI: '',
+      RNT: '',
+      actualBT: '',
+      totalBT: '',
+    };
+    this.updateState = this.updateState.bind(this);
+    this.calculate = this.calculate.bind(this);
+    this.submit = this.submit.bind(this);
+    this.renderComponent = this.renderComponent.bind(this);
+    this.submitDive = this.submitDive.bind(this);
   }
 
   /** Notify the user of the results of the submit. If successful, clear the form. */
@@ -32,33 +48,157 @@ class AddStuff extends React.Component {
     }
   }
 
-  /** On submit, insert the data. */
-  submit(data) {
-    const { name, quantity, condition } = data;
-    const owner = Meteor.user().username;
-    Stuffs.insert({ name, quantity, condition, owner }, this.insertCallback);
+  updateState(e, { name, value }) {
+    this.setState({ [name]: value });
   }
 
-  /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
-  render() {
+  /** On submit, insert the data. */
+  submitDive() {
+
+  }
+
+  calculate() {
+    if (!(this.state.time === '' && this.state.depth === '')) {
+      this.setState({
+        pressureGroup1: this.props.one[this.state.depth][this.state.time],
+      });
+      if (!(this.state.plannedSI === '')) {
+        this.setState({
+          pressureGroup2: this.props.two[this.state.pressureGroup1][this.state.plannedSI],
+        });
+        const arr = this.props.three[this.state.pressureGroup2][this.state.depth];
+        if (arr.length === 2) {
+          this.setState({
+            RNT: arr[0],
+            actualBT: arr[1],
+          });
+        } else {
+          this.setState({
+            RNT: arr[0],
+            actualBT: 0,
+          });
+        }
+        this.setState({
+          totalBT: this.state.RNT + this.state.actualBT,
+        });
+      }
+    }
+  }
+
+  renderComponent() {
+    let i = -1;
+    const dropdownOne = _.map(_.without(_.keys(this.props.one), '_id'), function (val) {
+      i++;
+      return {
+        key: i,
+        text: val,
+        value: val,
+      };
+    });
+    i = -1;
+    const dropdownTwo = _.map(_.keys(this.props.one[this.state.depth]), function (val) {
+      i++;
+      return {
+        key: i,
+        text: val,
+        value: val,
+      };
+    });
+    i = -1;
+    const dropdownThree = _.map(_.keys(this.props.two[this.state.pressureGroup1]), function (val) {
+      i++;
+      return {
+        key: i,
+        text: val,
+        value: val,
+      };
+    });
     return (
         <Grid container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Add Stuff</Header>
-            <AutoForm ref={(ref) => { this.formRef = ref; }} schema={StuffSchema} onSubmit={this.submit}>
-              <Segment>
-                <TextField name='name'/>
-                <NumField name='quantity' decimal={false}/>
-                <SelectField name='condition'/>
-                <SubmitField value='Submit'/>
+            <Header as="h2" textAlign="center">Add Dive</Header>
+                <h2 style={{ fontSize: 14 }}>Would you like to plan a dive?</h2>
+                <Container style={{ paddingLeft: 20 }}>
+                  <Form id='add-course' onSubmit={this.submitDive}>
+                    <Form.Group>
+                      <Form.Dropdown
+                          fluid search selection
+                          options={dropdownOne}
+                          name={'depth'}
+                          value={this.state.depth}
+                          onChange={this.updateState}
+                          onClick={this.calculate}
+                          placeholder={'Select Depth (in feet)'}
+                          style={{ minWidth: 150 }}
+                      />
+                      <Form.Dropdown
+                          fluid search selection
+                          options={dropdownTwo}
+                          name={'time'}
+                          value={this.state.time}
+                          onChange={this.updateState}
+                          onClick={this.calculate}
+                          placeholder={'Select Time'}
+                          style={{ minWidth: 150 }}
+                      />
+                      <Form.Dropdown
+                          fluid search selection
+                          options={dropdownThree}
+                          name={'plannedSI'}
+                          value={this.state.plannedSI}
+                          onChange={this.updateState}
+                          onClick={this.calculate}
+                          placeholder={'Select Planned Surface Interval'}
+                          style={{ minWidth: 150 }}
+                      />
+                      <Form.Button floated='right' color='blue' inverted icon='plus' />
+                    </Form.Group>
+                  </Form>
+                </Container>
                 <ErrorsField/>
                 <HiddenField name='owner' value='fakeuser@foo.com'/>
-              </Segment>
-            </AutoForm>
           </Grid.Column>
         </Grid>
     );
   }
+
+  /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
+  render() {
+    return this.props.ready ? (
+        this.renderComponent()
+    ) : (
+        <Loader active>Getting data</Loader>
+    );
+  }
 }
 
-export default AddStuff;
+AddStuff.propTypes = {
+  one: PropTypes.object.isRequired,
+  two: PropTypes.object.isRequired,
+  three: PropTypes.object.isRequired,
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  const subscription = Meteor.subscribe('DataTableOne');
+  const subscription2 = Meteor.subscribe('DataTableTwo');
+  const subscription3 = Meteor.subscribe('DataTableThree');
+
+  let tableOne = {};
+  let tableTwo = {};
+  let tableThree = {};
+  if (subscription.ready() && subscription2.ready() && subscription3.ready()) {
+    tableOne = DataTableOne.find({}).fetch();
+    tableTwo = DataTableTwo.find({}).fetch();
+    tableThree = DataTableThree.find({}).fetch();
+  }
+
+  return {
+    // Returns the entire array, [0] since we want the object
+    one: tableOne[0],
+    two: tableTwo[0],
+    three: tableThree[0],
+    ready:
+        subscription.ready() && subscription2.ready() && subscription3.ready()
+  };
+})(AddStuff);
