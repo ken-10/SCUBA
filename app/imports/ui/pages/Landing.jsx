@@ -1,12 +1,13 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
+import DefaultLanding from '../components/DefaultLanding';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
 
   render() {
     return (
-        <div className='landing-background'>
+        /*<div className='landing-background'>
           <Grid container stackable centered columns ={1}>
             <Grid.Column textAlign={'center'}>
               <Grid.Row className="title-main">
@@ -19,6 +20,9 @@ class Landing extends React.Component {
               </Grid.Row>
             </Grid.Column>
           </Grid>
+        </div>*/
+        <div>
+          <DefaultLanding/>
         </div>
     );
   }
