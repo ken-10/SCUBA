@@ -2,7 +2,17 @@ import React from "react";
 import { DataTableOne } from "/imports/api/data/dataTableOne";
 import { DataTableTwo } from "/imports/api/data/dataTableTwo";
 import { DataTableThree } from "/imports/api/data/dataTableThree";
-import { Grid, Header, Container, Form, Loader } from "semantic-ui-react";
+import {
+  Grid,
+  Header,
+  Container,
+  Form,
+  Loader,
+  Modal,
+  Button,
+  Icon,
+  Image
+} from "semantic-ui-react";
 import { Bert } from "meteor/themeteorchef:bert";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
@@ -28,7 +38,12 @@ class AddStuff extends React.Component {
       totalBT: "",
       dropdownOne: [],
       dropdownTwo: [],
-      dropdownThree: []
+      dropdownThree: [],
+      oneDisable: false,
+      twoDisable: true,
+      threeDisble: true,
+      submitDisable: true,
+      modal: false
     };
     this.insertCallback = this.insertCallback.bind(this);
     this.updateState = this.updateState.bind(this);
@@ -37,6 +52,8 @@ class AddStuff extends React.Component {
     this.dropdownOne = this.dropdownOne.bind(this);
     this.dropdownTwo = this.dropdownTwo.bind(this);
     this.dropdownThree = this.dropdownThree.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   /** Notify the user of the results of the submit. If successful, clear the form. */
@@ -51,6 +68,23 @@ class AddStuff extends React.Component {
   updateState(e, { name, value }) {
     this.setState({ [name]: value });
     Session.set(name, value);
+    if (name === "depth") {
+      this.setState({
+        oneDisable: true,
+        twoDisable: false
+      });
+    }
+    if (name === "time") {
+      this.setState({
+        threeDisble: false
+      });
+    }
+    if (name === "plannedSI") {
+      this.setState({
+        twoDisable: true,
+        submitDisable: false
+      });
+    }
   }
 
   /** On submit, insert the data. */
@@ -62,7 +96,6 @@ class AddStuff extends React.Component {
     const pressureGroup2 = this.props.two[pressureGroup1][plannedSI];
     const arr = this.props.three[pressureGroup2][depth];
     Session.set("pressureGroup2", pressureGroup2);
-    console.log(arr);
     if (arr.length === 2) {
       const RNT = arr[0];
       const actualBT = arr[1];
@@ -90,6 +123,30 @@ class AddStuff extends React.Component {
     };
     Profiles.update(user._id, {
       $push: { dives: dive }
+    });
+    this.clear();
+    this.setState({
+      modal: true
+    });
+  }
+
+  clear() {
+    this.setState({
+      depth: "",
+      time: "",
+      pressureGroup1: "",
+      pressureGroup2: "",
+      plannedSI: "",
+      RNT: "",
+      actualBT: "",
+      totalBT: "",
+      dropdownOne: [],
+      dropdownTwo: [],
+      dropdownThree: [],
+      oneDisable: false,
+      twoDisable: true,
+      threeDisble: true,
+      submitDisable: true
     });
   }
 
@@ -147,11 +204,26 @@ class AddStuff extends React.Component {
       }
     );
     this.setState({
-      dropdownThree: dropdownThree
+      dropdownThree: dropdownThree,
+      threeDisble: false
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      modal: false
     });
   }
 
   renderComponent() {
+    Session.setDefault("depth", "");
+    Session.setDefault("time", "");
+    Session.setDefault("pressureGroup1", "");
+    Session.setDefault("pressureGroup2", "");
+    Session.setDefault("plannedSI", "");
+    Session.setDefault("RNT", "");
+    Session.setDefault("actualBT", "");
+    Session.setDefault("totalBT", "");
     return (
       <Grid container centered>
         <Grid.Column>
@@ -160,7 +232,7 @@ class AddStuff extends React.Component {
           </Header>
           <h2 style={{ fontSize: 14 }}>Would you like to plan a dive?</h2>
           <Container style={{ paddingLeft: 20 }}>
-            <Form id="add-course" onSubmit={this.submitDive}>
+            <Form id="add-course">
               <Form.Group>
                 <Form.Dropdown
                   fluid
@@ -168,6 +240,7 @@ class AddStuff extends React.Component {
                   selection
                   options={this.state.dropdownOne}
                   name={"depth"}
+                  disabled={this.state.oneDisable}
                   value={this.state.depth}
                   onChange={this.updateState}
                   onClick={this.dropdownOne}
@@ -180,6 +253,7 @@ class AddStuff extends React.Component {
                   selection
                   options={this.state.dropdownTwo}
                   name={"time"}
+                  disabled={this.state.twoDisable}
                   value={this.state.time}
                   onChange={this.updateState}
                   onClick={this.dropdownTwo}
@@ -192,20 +266,49 @@ class AddStuff extends React.Component {
                   selection
                   options={this.state.dropdownThree}
                   name={"plannedSI"}
+                  disabled={this.state.threeDisble}
                   value={this.state.plannedSI}
                   onChange={this.updateState}
                   onClick={this.dropdownThree}
                   placeholder={"Select Planned Surface Interval"}
                   style={{ minWidth: 150 }}
                 />
-                <Form.Button
+                <Button
                   floated="right"
                   color="blue"
                   inverted
                   icon="plus"
+                  disabled={this.state.submitDisable}
+                  onClick={this.submitDive}
+                />
+                <Button
+                  floated="right"
+                  color="red"
+                  inverted
+                  icon="x"
+                  onClick={this.clear}
                 />
               </Form.Group>
             </Form>
+            <Modal open={this.state.modal} basic size="small">
+              <Modal.Header>
+                <Image size="medium" floated="left" src={"/images/diver.png"} />
+                Dive Added
+              </Modal.Header>
+              <Modal.Content>
+                <p>Depth: {Session.get("depth")}</p>
+                <p>Time: {Session.get("time")}</p>
+                <p>Surface Interval: {Session.get("plannedSI")}</p>
+                <p>Residual Nitrogen Time: {Session.get("RNT")}</p>
+                <p>Actual Bottom Time: {Session.get("actualBT")}</p>
+                <p>Total Bottom Time: {Session.get("totalBT")}</p>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button onClick={this.closeModal}>
+                  <Icon name="close" color="red" /> Close
+                </Button>
+              </Modal.Actions>
+            </Modal>
           </Container>
         </Grid.Column>
       </Grid>
