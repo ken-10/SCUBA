@@ -17,6 +17,10 @@ landing-header {
   font-size: 20px;
 }
 
+.landing-panel-1 {
+  background-color: #1a69a4;
+}
+
 .main-text {
   color: white;
   font-size: 50px;
