@@ -70,12 +70,12 @@ class AddStuff extends React.Component {
     Session.set(name, value);
     if (name === "depth") {
       this.setState({
-        oneDisable: true,
         twoDisable: false
       });
     }
     if (name === "time") {
       this.setState({
+        oneDisable: true,
         threeDisble: false
       });
     }
@@ -337,7 +337,7 @@ export default withTracker(() => {
   const subscription = Meteor.subscribe("DataTableOne");
   const subscription2 = Meteor.subscribe("DataTableTwo");
   const subscription3 = Meteor.subscribe("DataTableThree");
-  const subscription4 = Meteor.subscribe("Profile");
+  const subscription4 = Meteor.subscribe("Profiles");
 
   let tableOne = {};
   let tableTwo = {};
@@ -360,8 +360,7 @@ export default withTracker(() => {
     one: tableOne[0],
     two: tableTwo[0],
     three: tableThree[0],
-    profile,
-    profile,
+    profile: profile,
     ready:
       subscription.ready() && subscription2.ready() && subscription3.ready()
   };
