@@ -2,6 +2,11 @@ html, body {
   height: 100%;
 }
 
+.ui.inverted.borderless.top.fixed.menu {
+  height: 10%;
+  margin: auto;
+}
+
 .landing-background {
   background: url('images/scuba-background.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -9,16 +14,35 @@ html, body {
 }
 
 landing-header {
-  font-size: 35px;
-  line-height: 1.75em;
+  font-size: 80px;
+  color: white;
+  line-height: 2em;
+}
+
+landing-header2 {
+  font-size: 90px;
+  font-weight: 500;
+  color: lemonchiffon;
+
+}
+
+.landing-page {
+  font-family: "Arial", sans-serif;
+  padding-top: 10em;
+  padding-left: 10em;
+  background-color: #272840;
 }
 
 .landing-text {
-  font-size: 20px;
+  font-size: 26px;
+  color: whitesmoke;
+  line-height: 1.25em;
+  padding: 80px 200px 100px 7px;
+  letter-spacing: 0.4px;
 }
 
 .landing-panel-1 {
-  background-color: #1a69a4;
+  background-color: #272840;
 }
 
 .main-text {
