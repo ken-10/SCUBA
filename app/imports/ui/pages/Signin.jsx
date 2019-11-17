@@ -46,12 +46,15 @@ export default class Signin extends React.Component {
     }
     // Otherwise return the Login form.
     return (
+        <div className="signin">
         <Container>
           <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
             <Grid.Column>
-              <Header as="h2" textAlign="center">
+              <div className="signin-h1">
+              <Header textAlign="center" style={{ color: 'white' }}>
                 Login to your account
               </Header>
+              </div>
               <Form onSubmit={this.handleSubmit}>
                 <Segment stacked>
                   <Form.Input
@@ -90,6 +93,7 @@ export default class Signin extends React.Component {
             </Grid.Column>
           </Grid>
         </Container>
+        </div>
     );
   }
 }

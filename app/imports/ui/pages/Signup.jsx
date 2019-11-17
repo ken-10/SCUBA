@@ -37,12 +37,15 @@ export default class Signup extends React.Component {
   /** Display the signup form. */
   render() {
     return (
+        <div className="signup">
         <Container>
           <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
             <Grid.Column>
-              <Header as="h2" textAlign="center">
+              <div className="signup-h1">
+              <Header textAlign="center" style={{ color: 'white' }}>
                 Register your account
               </Header>
+              </div>
               <Form onSubmit={this.handleSubmit}>
                 <Segment stacked>
                   <Form.Input
@@ -81,6 +84,7 @@ export default class Signup extends React.Component {
             </Grid.Column>
           </Grid>
         </Container>
+        </div>
     );
   }
 }

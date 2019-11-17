@@ -2,9 +2,37 @@ html, body {
   height: 100%;
 }
 
-.ui.inverted.borderless.top.fixed.menu {
+.ui.borderless.top.fixed.menu {
   height: 10%;
   margin: auto;
+}
+
+a.home {
+  color: whitesmoke !important;
+}
+
+.signin {
+  padding: 200px 0 100px 0;
+  background-color: #475F6F;
+}
+
+.signin-h1 {
+  font-family: "Arial", sans-serif;
+  font-size: 30px;
+  color: whitesmoke;
+  padding-bottom: 20px;
+}
+
+.signup {
+  padding: 200px 0 100px 0;
+  background-color: #475F6F;
+}
+
+.signup-h1 {
+  font-family: "Arial", sans-serif;
+  font-size: 30px;
+  color: whitesmoke;
+  padding-bottom: 20px;
 }
 
 .landing-background {
@@ -22,7 +50,7 @@ landing-header {
 landing-header2 {
   font-size: 90px;
   font-weight: 500;
-  color: lemonchiffon;
+  color: #FBF1D4;
 
 }
 
@@ -30,7 +58,7 @@ landing-header2 {
   font-family: "Arial", sans-serif;
   padding-top: 10em;
   padding-left: 10em;
-  background-color: #272840;
+  background-color: #475F6F;
 }
 
 .landing-text {
@@ -42,7 +70,11 @@ landing-header2 {
 }
 
 .landing-panel-1 {
-  background-color: #272840;
+  background-color: #475F6F;
+}
+
+.landing-img-1 {
+  padding: 40px 0 0 100px;
 }
 
 .main-text {
