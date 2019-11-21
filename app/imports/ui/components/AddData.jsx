@@ -3,17 +3,13 @@ import { DataTableOne } from "/imports/api/data/dataTableOne";
 import { DataTableTwo } from "/imports/api/data/dataTableTwo";
 import { DataTableThree } from "/imports/api/data/dataTableThree";
 import {
-  Grid,
   Header,
   Container,
   Form,
   Loader,
   Modal,
-  Button,
-  Icon,
-  Image
+  Button
 } from "semantic-ui-react";
-import { Bert } from "meteor/themeteorchef:bert";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
@@ -23,7 +19,7 @@ import { Session } from "meteor/session";
 const _ = require("underscore");
 
 /** Renders the Page for adding a document. */
-class AddStuff extends React.Component {
+class AddData extends React.Component {
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
     super(props);
@@ -39,30 +35,15 @@ class AddStuff extends React.Component {
       dropdownOne: [],
       dropdownTwo: [],
       dropdownThree: [],
-      oneDisable: false,
-      twoDisable: true,
-      threeDisble: true,
-      submitDisable: true,
-      modal: false
+      submitDisable: true
     };
-    this.insertCallback = this.insertCallback.bind(this);
     this.updateState = this.updateState.bind(this);
     this.renderComponent = this.renderComponent.bind(this);
     this.submitDive = this.submitDive.bind(this);
     this.dropdownOne = this.dropdownOne.bind(this);
     this.dropdownTwo = this.dropdownTwo.bind(this);
     this.dropdownThree = this.dropdownThree.bind(this);
-    this.closeModal = this.closeModal.bind(this);
     this.clear = this.clear.bind(this);
-  }
-
-  /** Notify the user of the results of the submit. If successful, clear the form. */
-  insertCallback(error) {
-    if (error) {
-      Bert.alert({ type: "danger", message: `Add failed: ${error.message}` });
-    } else {
-      Bert.alert({ type: "success", message: "Add succeeded" });
-    }
   }
 
   updateState(e, { name, value }) {
@@ -70,18 +51,18 @@ class AddStuff extends React.Component {
     Session.set(name, value);
     if (name === "depth") {
       this.setState({
-        twoDisable: false
+        time: "",
+        plannedSI: ""
       });
     }
     if (name === "time") {
       this.setState({
-        oneDisable: true,
-        threeDisble: false
+        submitDisable: true,
+        plannedSI: ""
       });
     }
     if (name === "plannedSI") {
       this.setState({
-        twoDisable: true,
         submitDisable: false
       });
     }
@@ -111,7 +92,20 @@ class AddStuff extends React.Component {
       Session.set("actualBT", actualBT);
       Session.set("totalBT", totalBT);
     }
+    const dateObj = new Date();
+    const date = dateObj.toLocaleString();
     const dive = {
+      depth: Session.get("depth"),
+      time: Session.get("time"),
+      pressureGroup1: Session.get("pressureGroup1"),
+      pressureGroup2: Session.get("pressureGroup2"),
+      plannedSI: Session.get("plannedSI"),
+      RNT: Session.get("RNT"),
+      actualBT: Session.get("actualBT"),
+      totalBT: Session.get("totalBT"),
+      date: date
+    };
+    const noDate = {
       depth: Session.get("depth"),
       time: Session.get("time"),
       pressureGroup1: Session.get("pressureGroup1"),
@@ -121,13 +115,13 @@ class AddStuff extends React.Component {
       actualBT: Session.get("actualBT"),
       totalBT: Session.get("totalBT")
     };
-    Profiles.update(user._id, {
-      $push: { dives: dive }
-    });
+    const repeat = _.find(this.props.profile.dives, noDate);
+    repeat === undefined
+      ? Profiles.update(user._id, {
+          $push: { dives: dive }
+        })
+      : "";
     this.clear();
-    this.setState({
-      modal: true
-    });
   }
 
   clear() {
@@ -143,9 +137,6 @@ class AddStuff extends React.Component {
       dropdownOne: [],
       dropdownTwo: [],
       dropdownThree: [],
-      oneDisable: false,
-      twoDisable: true,
-      threeDisble: true,
       submitDisable: true
     });
   }
@@ -209,12 +200,6 @@ class AddStuff extends React.Component {
     });
   }
 
-  closeModal() {
-    this.setState({
-      modal: false
-    });
-  }
-
   renderComponent() {
     Session.setDefault("depth", "");
     Session.setDefault("time", "");
@@ -225,76 +210,64 @@ class AddStuff extends React.Component {
     Session.setDefault("actualBT", "");
     Session.setDefault("totalBT", "");
     return (
-      <Grid container centered>
-        <Grid.Column>
-          <Header as="h2" textAlign="center">
-            Add Dive
-          </Header>
-          <h2 style={{ fontSize: 14 }}>Would you like to plan a dive?</h2>
-          <Container style={{ paddingLeft: 20 }}>
-            <Form id="add-course">
-              <Form.Group>
-                <Form.Dropdown
-                  fluid
-                  search
-                  selection
-                  options={this.state.dropdownOne}
-                  name={"depth"}
-                  disabled={this.state.oneDisable}
-                  value={this.state.depth}
-                  onChange={this.updateState}
-                  onClick={this.dropdownOne}
-                  placeholder={"Select Depth (in feet)"}
-                  style={{ minWidth: 150 }}
-                />
-                <Form.Dropdown
-                  fluid
-                  search
-                  selection
-                  options={this.state.dropdownTwo}
-                  name={"time"}
-                  disabled={this.state.twoDisable}
-                  value={this.state.time}
-                  onChange={this.updateState}
-                  onClick={this.dropdownTwo}
-                  placeholder={"Select Time"}
-                  style={{ minWidth: 150 }}
-                />
-                <Form.Dropdown
-                  fluid
-                  search
-                  selection
-                  options={this.state.dropdownThree}
-                  name={"plannedSI"}
-                  disabled={this.state.threeDisble}
-                  value={this.state.plannedSI}
-                  onChange={this.updateState}
-                  onClick={this.dropdownThree}
-                  placeholder={"Select Planned Surface Interval"}
-                  style={{ minWidth: 150 }}
-                />
+      <Container>
+        <Header as="h2" textAlign="center">
+          Plan a Dive
+        </Header>
+        <Form id="add-course">
+          <Form.Group>
+            <Form.Dropdown
+              fluid
+              search
+              selection
+              options={this.state.dropdownOne}
+              name={"depth"}
+              value={this.state.depth}
+              onChange={this.updateState}
+              onClick={this.dropdownOne}
+              placeholder={"Select Depth (in feet)"}
+              style={{ minWidth: 150 }}
+            />
+            <Form.Dropdown
+              fluid
+              search
+              selection
+              options={this.state.dropdownTwo}
+              name={"time"}
+              value={this.state.time}
+              onChange={this.updateState}
+              onClick={this.dropdownTwo}
+              placeholder={"Select Time"}
+              style={{ minWidth: 150 }}
+            />
+            <Form.Dropdown
+              fluid
+              search
+              selection
+              options={this.state.dropdownThree}
+              name={"plannedSI"}
+              value={this.state.plannedSI}
+              onChange={this.updateState}
+              onClick={this.dropdownThree}
+              placeholder={"Select Planned Surface Interval"}
+              style={{ minWidth: 150 }}
+            />
+            <Modal
+              closeIcon
+              closeOnDimmerClick={false}
+              trigger={
                 <Button
                   floated="right"
                   color="blue"
-                  inverted
-                  icon="plus"
+                  // inverted
                   disabled={this.state.submitDisable}
                   onClick={this.submitDive}
-                />
-                <Button
-                  floated="right"
-                  color="red"
-                  inverted
-                  icon="x"
-                  onClick={this.clear}
-                />
-              </Form.Group>
-            </Form>
-            <Modal open={this.state.modal} basic size="small">
-              <Modal.Header>
-                <Image size="medium" floated="left" src={"/images/diver.png"} />
-                Dive Added
-              </Modal.Header>
+                >
+                  Calculate
+                </Button>
+              }
+            >
+              <Modal.Header>Dive Result</Modal.Header>
               <Modal.Content>
                 <p>Depth: {Session.get("depth")}</p>
                 <p>Time: {Session.get("time")}</p>
@@ -303,15 +276,18 @@ class AddStuff extends React.Component {
                 <p>Actual Bottom Time: {Session.get("actualBT")}</p>
                 <p>Total Bottom Time: {Session.get("totalBT")}</p>
               </Modal.Content>
-              <Modal.Actions>
-                <Button onClick={this.closeModal}>
-                  <Icon name="close" color="red" /> Close
-                </Button>
-              </Modal.Actions>
             </Modal>
-          </Container>
-        </Grid.Column>
-      </Grid>
+            <Button
+              floated="right"
+              color="red"
+              // inverted
+              onClick={this.clear}
+            >
+              Clear
+            </Button>
+          </Form.Group>
+        </Form>
+      </Container>
     );
   }
 
@@ -325,7 +301,7 @@ class AddStuff extends React.Component {
   }
 }
 
-AddStuff.propTypes = {
+AddData.propTypes = {
   one: PropTypes.object.isRequired,
   two: PropTypes.object.isRequired,
   three: PropTypes.object.isRequired,
@@ -364,4 +340,4 @@ export default withTracker(() => {
     ready:
       subscription.ready() && subscription2.ready() && subscription3.ready()
   };
-})(AddStuff);
+})(AddData);
