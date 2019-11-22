@@ -41,6 +41,12 @@ a.home {
   padding-bottom: 750px;
 }
 
+.landing-section-1 {
+  padding-top: 10em;
+  padding-left: 10em;
+  padding-bottom: 10em;
+}
+
 landing-header {
   font-size: 80px;
   color: white;
@@ -56,8 +62,6 @@ landing-header2 {
 
 .landing-page {
   font-family: "Arial", sans-serif;
-  padding-top: 10em;
-  padding-left: 10em;
   background-color: #475F6F;
 }
 
@@ -69,7 +73,18 @@ landing-header2 {
   letter-spacing: 0.4px;
 }
 
+.landing-text2 {
+  font-size: 20px;
+  color: whitesmoke;
+  line-height: 1.25em;
+  letter-spacing: 0.4px;
+}
+
 .landing-panel-1 {
+  background-color: #475F6F;
+}
+
+.landing-panel-2 {
   background-color: #475F6F;
 }
 

@@ -12,6 +12,7 @@ class DefaultLanding extends React.Component {
 
     return (
         <div className="landing-page" onLoad= 'toggleVisibility();'>
+          <div className="landing-section-1">
           <Grid verticalAlign='left' textAlign='left' style={{ margin: '0' }}>
             <Grid.Row columns={2} className="landing-panel-1">
                 <Grid.Column width={8}>
@@ -25,10 +26,28 @@ class DefaultLanding extends React.Component {
               </Grid.Column>
               <Grid.Column width={8}>
                 <div className="landing-img-1">
-                  <Image style={{ 'font-size': 150 }} avatar src='/images/landing-scuba.svg'/>
+                  <Image style={{ 'font-size': 171 }} avatar src='/images/landing-scuba.svg'/>
                 </div>
               </Grid.Column>
             </Grid.Row>
+          </Grid>
+          </div>
+
+          <Grid divided='vertically' textAlign='center' style={{ marginTop: '0' }}>
+            <Grid.Row columns={1} className="landing-panel-2">
+              <Grid.Column>
+              <Header as={'landing-header3'}>
+                What is <i>my</i>Diver?<br/>
+              </Header>
+              </Grid.Column>
+            </Grid.Row>
+              <Grid.Row columns={1}>
+                <Grid.Column width={8}>
+                <p className="landing-text2"><i>my</i>Diver is an online dive table and journal. Below are some of our features listed:<br/>
+                </p>
+                </Grid.Column>
+              </Grid.Row>
+
           </Grid>
         </div>
 
