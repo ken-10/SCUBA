@@ -210,7 +210,7 @@ class AddData extends React.Component {
     Session.setDefault("actualBT", "");
     Session.setDefault("totalBT", "");
     return (
-      <Container>
+      <Container className="planner-ui">
         <Header as="h2" textAlign="center">
           Plan a Dive
         </Header>

@@ -92,6 +92,10 @@ landing-header2 {
   padding: 40px 0 0 100px;
 }
 
+.planner-ui {
+  padding-top: 100px;
+}
+
 .main-text {
   color: white;
   font-size: 50px;
