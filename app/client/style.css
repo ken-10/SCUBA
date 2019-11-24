@@ -47,10 +47,6 @@ a.home {
   padding-bottom: 10em;
 }
 
-.button.content {
-  padding-left: 35px;
-}
-
 landing-header {
   font-size: 80px;
   color: white;
@@ -75,9 +71,15 @@ landing-header-sub-3 {
   letter-spacing: 0.4px;
 }
 
+.landing-cards {
+  justify-content: center;
+}
+
 .landing-card-row {
   margin-bottom: 300px;
-  margin-left: 63px;
+  margin-right: 100px;
+  margin-left: 100px;
+  justify-content: center;
 }
 
 landing-card-header {
@@ -85,6 +87,7 @@ landing-card-header {
   color: dimgrey;
   line-height: 2em;
 }
+
 
 .ui.card {
   box-shadow: none !important;
@@ -122,7 +125,7 @@ landing-card-header {
   font-size: 26px;
   color: whitesmoke;
   line-height: 1.25em;
-  padding: 80px 200px 100px 7px;
+  padding: 80px 200px 70px 7px;
   letter-spacing: 0.4px;
 }
 
@@ -144,7 +147,7 @@ landing-card-header {
 }
 
 .landing-img-1 {
-  padding: 40px 0 0 100px;
+  padding: 45px 0 0 180px;
 }
 
 .landing-divider {

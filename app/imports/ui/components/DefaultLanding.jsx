@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Header, Transition, Image, Button, Icon } from 'semantic-ui-react';
+import { Grid, Header, Transition, Image, Button, Container } from 'semantic-ui-react';
 import { Dropdown } from 'semantic-ui-react/dist/commonjs/modules/Dropdown';
 import { NavLink } from 'react-router-dom';
 
@@ -34,12 +34,11 @@ class DefaultLanding extends React.Component {
                 <p className="landing-text">
                   <b>Less</b> time with tables, <b>More</b> time diving
                 </p>
-                  <Button animated='fade'>
-                    <Button.Content visible>Register Now</Button.Content>
-                    <Button.Content hidden className="button content">
-                      It's free!
-                    </Button.Content>
-                  </Button>
+                  <div className="landing-button">
+                  <Button.Group>
+                    <Button as={NavLink} exact to='/signup/'>Register Now</Button>
+                  </Button.Group>
+                  </div>
               </Grid.Column>
 
               <Grid.Column width={8}>
@@ -75,7 +74,9 @@ class DefaultLanding extends React.Component {
                 </p>
                 </Grid.Column>
               </Grid.Row>
+          </Grid>
 
+          <Grid className="landing-cards">
             <Grid.Row className="landing-card-row" columns={3}>
               <Grid.Column width={4}>
                 <a className="ui card" style={{ height: '400px', width: '250px' }}>
