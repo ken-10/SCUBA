@@ -2,6 +2,8 @@ html, body {
   height: 100%;
 }
 
+#wholepage { position:absolute; margin:0px; width:100%; }
+
 .ui.borderless.top.fixed.menu {
   height: 10%;
   margin: auto;
@@ -42,9 +44,9 @@ a.home {
 }
 
 .landing-section-1 {
-  padding-top: 10em;
-  padding-left: 10em;
-  padding-bottom: 10em;
+  padding-top: 9.8%;
+  padding-left: 9.8%;
+  padding-bottom: 9.8%;
 }
 
 landing-header {
@@ -76,10 +78,11 @@ landing-header-sub-3 {
 }
 
 .landing-card-row {
-  margin-bottom: 300px;
-  margin-right: 100px;
-  margin-left: 100px;
-  justify-content: center;
+  position: relative;
+  margin-bottom: 20%;
+  margin-right: 5%;
+  margin-left: 9.1%;
+
 }
 
 landing-card-header {
@@ -125,7 +128,7 @@ landing-card-header {
   font-size: 26px;
   color: whitesmoke;
   line-height: 1.25em;
-  padding: 80px 200px 70px 7px;
+  padding: 10% 3% 10% 0.3%;
   letter-spacing: 0.4px;
 }
 
@@ -147,11 +150,21 @@ landing-card-header {
 }
 
 .landing-img-1 {
-  padding: 45px 0 0 180px;
+  padding: 10% 0 0 20%;
 }
 
 .landing-divider {
   color: #FBF1D4;
+}
+
+.footer-text {
+  line-height: 2em;
+}
+
+.footerButton {
+  line-height: 4em;
+  background-color: #FBF1D4 !important;
+  margin: 21px 14px !important;
 }
 
 .planner-ui {
