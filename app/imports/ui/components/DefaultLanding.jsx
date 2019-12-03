@@ -1,6 +1,5 @@
 import React from 'react';
-import { Grid, Header, Transition, Image, Button, Container } from 'semantic-ui-react';
-import { Dropdown } from 'semantic-ui-react/dist/commonjs/modules/Dropdown';
+import { Grid, Header, Transition, Image, Button} from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 
 class DefaultLanding extends React.Component {

@@ -16,7 +16,6 @@ import NotFound from "../pages/NotFound";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import Signout from "../pages/Signout";
-import Planner from "../pages/Planner";
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -29,7 +28,7 @@ class App extends React.Component {
             <Route exact path="/" component={Landing} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
-            <ProtectedRoute path="/planner" component={Planner} />
+
             <ProtectedRoute path="/signout" component={Signout} />
             <Route component={NotFound} />
           </Switch>
@@ -86,13 +85,13 @@ const AdminProtectedRoute = ({ component: Component, ...rest }) => (
 /** Require a component and location to be passed to each ProtectedRoute. */
 ProtectedRoute.propTypes = {
   component: PropTypes.func.isRequired,
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 /** Require a component and location to be passed to each AdminProtectedRoute. */
 AdminProtectedRoute.propTypes = {
   component: PropTypes.func.isRequired,
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 export default App;
