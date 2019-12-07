@@ -361,7 +361,7 @@ class AddData extends React.Component {
       <Container className="planner-ui">
         <Card.Group centered itemsPerRow={4}>
           <Transition.Group>
-            <Transition visible={this.state.input} unmountOnHide={true}>
+            <Transition visible={this.state.input}>
               <Card className="initial-dive-card">
                 <Header as="h2" textAlign="center">
                   Plan a Dive
@@ -441,7 +441,7 @@ class AddData extends React.Component {
                 </Form>
               </Card>
             </Transition>
-            <Transition visible={this.state.input2} unmountOnHide={true}>
+            <Transition visible={this.state.input2}>
               <Card className="initial-dive-card">
                 <Header as="h2" textAlign="center">
                   Plan a Dive
@@ -508,7 +508,7 @@ class AddData extends React.Component {
                 </Form>
               </Card>
             </Transition>
-            <Transition visible={this.state.result} unmountOnHide={true}>
+            <Transition visible={this.state.result}>
               <Card>
                 <Header as="h2" textAlign="center">
                   Current Dive
@@ -603,6 +603,7 @@ export default withTracker(() => {
       subscription.ready() &&
       subscription2.ready() &&
       subscription3.ready() &&
-      subscription4.ready()
+      subscription4.ready() &&
+      subscription5.ready()
   };
 })(AddData);

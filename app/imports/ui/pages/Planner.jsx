@@ -21,7 +21,9 @@ class Planner extends React.Component {
         <Grid.Row>
           <AddData />
         </Grid.Row>
-        <Grid.Row>{/* <DataList /> */}</Grid.Row>
+        <Grid.Row>
+          <DataList />
+        </Grid.Row>
       </Grid>
     );
   }
