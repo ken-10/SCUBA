@@ -17,14 +17,16 @@ class Planner extends React.Component {
 
   renderComponent() {
     return (
+        <div className="planner">
       <Grid container centered>
-        <Grid.Row>
+        <Grid.Row className="add-data">
           <AddData />
         </Grid.Row>
-        <Grid.Row>
+        <Grid.Row className="data-list">
           <DataList />
         </Grid.Row>
       </Grid>
+        </div>
     );
   }
 

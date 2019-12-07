@@ -160,6 +160,31 @@ landing-card-header {
   color: #fbf1d4;
 }
 
+.planner {
+  background-color: #475f6f;
+}
+
+.add-data {
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.add-data-buttons {
+  color: #fbf1d4 !important;
+}
+
+.initial-dive-card {
+  color: white;
+}
+
+.data-list {
+  margin-bottom: 8%;
+}
+
+.list-header {
+  color: white;
+}
+
 .footer-text {
   line-height: 2em;
 }

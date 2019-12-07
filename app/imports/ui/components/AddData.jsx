@@ -362,8 +362,8 @@ class AddData extends React.Component {
         <Card.Group centered itemsPerRow={4}>
           <Transition.Group>
             <Transition visible={this.state.input}>
-              <Card className="initial-dive-card">
-                <Header as="h2" textAlign="center">
+              <Card className="initial-dive-card" style={{ background: '#475f6f' }}>
+                <Header style={{ color: 'white' }} as="h2" textAlign="center">
                   Plan a Dive
                 </Header>
                 <Form>
@@ -419,10 +419,10 @@ class AddData extends React.Component {
                     placeholder={"Surface Interval"}
                     style={{ minWidth: 150 }}
                   />
-                  <Button
+                  <Button className="add-data-buttons"
                     style={{ paddingTop: 10 }}
                     floated="right"
-                    color="blue"
+                    color="#fbf1d4"
                     inverted
                     disabled={this.state.submitDisable}
                     onClick={this.submitDive}
@@ -442,8 +442,8 @@ class AddData extends React.Component {
               </Card>
             </Transition>
             <Transition visible={this.state.input2}>
-              <Card className="initial-dive-card">
-                <Header as="h2" textAlign="center">
+              <Card className="initial-dive-card" style={{ background: '#475f6f' }}>
+                <Header as="h2" textAlign="center" style={{ color: 'white' }}>
                   Plan a Dive
                 </Header>
                 <Form>
@@ -486,10 +486,9 @@ class AddData extends React.Component {
                     placeholder={"Surface Interval"}
                     style={{ minWidth: 150 }}
                   />
-                  <Button
+                  <Button className="add-data-buttons"
                     style={{ paddingTop: 10 }}
                     floated="right"
-                    color="blue"
                     inverted
                     disabled={this.state.submitDisable}
                     onClick={this.submitDive}
@@ -509,8 +508,8 @@ class AddData extends React.Component {
               </Card>
             </Transition>
             <Transition visible={this.state.result}>
-              <Card>
-                <Header as="h2" textAlign="center">
+              <Card className="initial-dive-card" style={{ background: '#475f6f' }}>
+                <Header as="h2" textAlign="center" style={{ color: 'white' }}>
                   Current Dive
                 </Header>
                 <h4>Starting Pressure Group: {Session.get("pgi")} </h4>
@@ -521,10 +520,9 @@ class AddData extends React.Component {
                 <h4>Final Pressure Group: {Session.get("pressureGroup2")}</h4>
                 <h4>Surface Interval: {Session.get("plannedSI")}</h4>
                 <h4>Next Dive Pressure Group: {Session.get("fpressure")}</h4>
-                <Button
+                <Button className="add-data-buttons"
                   style={{ paddingTop: 10 }}
                   floated="right"
-                  color="blue"
                   inverted
                   onClick={this.anotherDive}
                 >

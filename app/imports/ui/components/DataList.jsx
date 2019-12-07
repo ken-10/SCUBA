@@ -73,7 +73,7 @@ class DataList extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center">
+        <Header style={{ color: 'white', paddingBottom: 5 }} as="h2" textAlign="center">
           List of Planned Dives
         </Header>
         {this.props.profile.dives.length > 0 ? (
@@ -98,7 +98,7 @@ class DataList extends React.Component {
             );
           })
         ) : (
-          <h3>No Dives Planned</h3>
+          <h3 style={{ color: 'white' }}>No Dives Planned</h3>
         )}
       </Container>
     );
