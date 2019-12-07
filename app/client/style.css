@@ -42,16 +42,17 @@ a.home {
   padding-bottom: 20px;
 }
 
-.landing-background {
-  background: url("images/scuba-background.jpg") no-repeat center center fixed;
-  background-size: cover;
-  padding-bottom: 750px;
-}
 
 .landing-section-1 {
   padding-top: 9.8%;
   padding-left: 9.8%;
   padding-bottom: 9.8%;
+}
+
+.landing-section-2 {
+  padding-top: 13%;
+  padding-bottom: 13%;
+  background-color: #E0E1E2;
 }
 
 landing-header {
@@ -76,50 +77,6 @@ landing-header-sub-3 {
   font-size: 35px;
   color: #fbf1d4;
   letter-spacing: 0.4px;
-}
-
-.landing-cards {
-  justify-content: center;
-}
-
-.landing-card-row {
-  position: relative;
-  margin-bottom: 20%;
-  margin-right: 5%;
-  margin-left: 9.1%;
-}
-
-landing-card-header {
-  font-size: 20px;
-  color: dimgrey;
-  line-height: 2em;
-}
-
-.ui.card {
-  box-shadow: none !important;
-}
-
-.card-img {
-  padding-left: 100px;
-  opacity: 0.6;
-}
-
-.card-img-2 {
-  padding-top: 20px;
-  padding-left: 100px;
-  opacity: 0.6;
-}
-
-.card-img-3 {
-  padding-top: 20px;
-  padding-left: 100px;
-  opacity: 0.6;
-}
-
-.content {
-  text-align: left;
-  line-height: 1.9em;
-  letter-spacing: 0.2px;
 }
 
 .landing-page {
@@ -149,15 +106,21 @@ landing-card-header {
 }
 
 .landing-panel-2 {
-  background-color: #475f6f;
+
+}
+
+panel-2-header {
+  font-size: 40px;
+  font-weight: bolder;
+  padding-bottom: 5%;
 }
 
 .landing-img-1 {
   padding: 10% 0 0 20%;
 }
 
-.landing-divider {
-  color: #fbf1d4;
+.description {
+  font-size: 17px;
 }
 
 .planner {
