@@ -1,8 +1,13 @@
-html, body {
+html,
+body {
   height: 100%;
 }
 
-#wholepage { position:absolute; margin:0px; width:100%; }
+#wholepage {
+  position: absolute;
+  margin: 0px;
+  width: 100%;
+}
 
 .ui.borderless.top.fixed.menu {
   height: 10%;
@@ -15,7 +20,7 @@ a.home {
 
 .signin {
   padding: 200px 0 100px 0;
-  background-color: #475F6F;
+  background-color: #475f6f;
 }
 
 .signin-h1 {
@@ -27,7 +32,7 @@ a.home {
 
 .signup {
   padding: 200px 0 100px 0;
-  background-color: #475F6F;
+  background-color: #475f6f;
 }
 
 .signup-h1 {
@@ -38,7 +43,7 @@ a.home {
 }
 
 .landing-background {
-  background: url('images/scuba-background.jpg') no-repeat center center fixed;
+  background: url("images/scuba-background.jpg") no-repeat center center fixed;
   background-size: cover;
   padding-bottom: 750px;
 }
@@ -58,7 +63,7 @@ landing-header {
 landing-header2 {
   font-size: 90px;
   font-weight: 500;
-  color: #FBF1D4;
+  color: #fbf1d4;
 }
 
 landing-header3 {
@@ -69,7 +74,7 @@ landing-header3 {
 
 landing-header-sub-3 {
   font-size: 35px;
-  color: #FBF1D4;
+  color: #fbf1d4;
   letter-spacing: 0.4px;
 }
 
@@ -82,7 +87,6 @@ landing-header-sub-3 {
   margin-bottom: 20%;
   margin-right: 5%;
   margin-left: 9.1%;
-
 }
 
 landing-card-header {
@@ -90,7 +94,6 @@ landing-card-header {
   color: dimgrey;
   line-height: 2em;
 }
-
 
 .ui.card {
   box-shadow: none !important;
@@ -121,7 +124,7 @@ landing-card-header {
 
 .landing-page {
   font-family: "Arial", sans-serif;
-  background-color: #475F6F;
+  background-color: #475f6f;
 }
 
 .landing-text {
@@ -142,11 +145,11 @@ landing-card-header {
 }
 
 .landing-panel-1 {
-  background-color: #475F6F;
+  background-color: #475f6f;
 }
 
 .landing-panel-2 {
-  background-color: #475F6F;
+  background-color: #475f6f;
 }
 
 .landing-img-1 {
@@ -154,7 +157,7 @@ landing-card-header {
 }
 
 .landing-divider {
-  color: #FBF1D4;
+  color: #fbf1d4;
 }
 
 .footer-text {
@@ -163,7 +166,7 @@ landing-card-header {
 
 .footerButton {
   line-height: 4em;
-  background-color: #FBF1D4 !important;
+  background-color: #fbf1d4 !important;
   margin: 21px 14px !important;
 }
 
@@ -171,3 +174,6 @@ landing-card-header {
   padding-top: 100px;
 }
 
+button {
+  padding-top: 10px;
+}

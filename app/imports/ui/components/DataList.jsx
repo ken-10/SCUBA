@@ -1,6 +1,14 @@
 import React from "react";
 import { Meteor } from "meteor/meteor";
-import { Container, Header, Loader } from "semantic-ui-react";
+import {
+  Container,
+  Header,
+  Loader,
+  Card,
+  Button,
+  Modal,
+  Segment
+} from "semantic-ui-react";
 import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 import { Profiles } from "/imports/api/profile/profile";
@@ -10,6 +18,10 @@ const _ = require("underscore");
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class DataList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.renderCard = this.renderCard.bind(this);
+  }
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
     return this.props.ready ? (
@@ -19,43 +31,71 @@ class DataList extends React.Component {
     );
   }
 
-  /** Render the page once subscriptions have been received. */
-  renderPage() {
-    function renderCard(data, index) {
-      const depth = data.depth;
-      const time = data.time;
-      const psi = data.plannedSI;
-      const rnt = data.RNT;
-      const abt = data.actualBT;
-      const tbt = data.totalBT;
-      const pg1 = data.pressureGroup1;
-      const pg2 = data.pressureGroup2;
-      const date = data.date;
+  toggleCollapsed() {
+    this.setState({
+      isCollapsed: !this.state.isCollapsed
+    });
+  }
+
+  renderCard(data) {
+    const dives = data.plan;
+
+    return _.map(dives, function(dive) {
+      const pgi = dive.pgi;
+      const depth = dive.depth;
+      const pressureGroup1 = dive.pressureGroup1;
+      const actualBT = dive.actualBT;
+      const totalBT = dive.totalBT;
+      const ipgi = dive.ipgi;
+      const plannedSI = dive.plannedSI;
+      const fpressure = dive.fpressure;
 
       return (
-        <DataCard
-          index={index}
-          depth={depth}
-          time={time}
-          psi={psi}
-          rnt={rnt}
-          abt={abt}
-          tbt={tbt}
-          pg1={pg1}
-          pg2={pg2}
-          date={date}
-        />
+        <Container>
+          <Segment padded>
+            <DataCard
+              pgi={pgi}
+              depth={depth}
+              pressureGroup1={pressureGroup1}
+              actualBT={actualBT}
+              totalBT={totalBT}
+              ipgi={ipgi}
+              plannedSI={plannedSI}
+              fpressure={fpressure}
+            />
+          </Segment>
+        </Container>
       );
-    }
+    });
+  }
 
+  /** Render the page once subscriptions have been received. */
+  renderPage() {
     return (
       <Container>
         <Header as="h2" textAlign="center">
           List of Planned Dives
         </Header>
         {this.props.profile.dives.length > 0 ? (
-          _.map(this.props.profile.dives, (dive, index) => {
-            return renderCard(dive, index);
+          _.map(this.props.profile.dives, plan => {
+            return (
+              <Modal
+                closeIcon
+                closeOnDimmerClick={false}
+                trigger={
+                  <Button>
+                    <Header as="h3" textAlign="center">
+                      {plan.date}
+                    </Header>
+                  </Button>
+                }
+              >
+                <Modal.Header>{plan.date}</Modal.Header>
+                <Modal.Content>
+                  <Card.Group>{this.renderCard(plan)}</Card.Group>
+                </Modal.Content>
+              </Modal>
+            );
           })
         ) : (
           <h3>No Dives Planned</h3>

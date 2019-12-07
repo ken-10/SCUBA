@@ -3,10 +3,10 @@ import SimpleSchema from "simpl-schema";
 import { Tracker } from "meteor/tracker";
 
 /** Create a Meteor collection. */
-const DataTableThree = new Mongo.Collection("DataTableThree");
+const DataTablePGI = new Mongo.Collection("DataTablePGI");
 
 /** Create a schema to constrain the structure of documents associated with this collection. */
-const DataTableThreeSchema = new SimpleSchema(
+const DataTablePGISchema = new SimpleSchema(
   {
     "N/A": { type: Object, blackbox: true },
     A: { type: Object, blackbox: true },
@@ -40,7 +40,7 @@ const DataTableThreeSchema = new SimpleSchema(
 );
 
 /** Attach this schema to the collection. */
-DataTableThree.attachSchema(DataTableThreeSchema);
+DataTablePGI.attachSchema(DataTablePGISchema);
 
 /** Make the collection and schema available to other code. */
-export { DataTableThree, DataTableThreeSchema };
+export { DataTablePGI, DataTablePGISchema };
