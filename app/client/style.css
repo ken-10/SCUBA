@@ -162,6 +162,10 @@ panel-2-header {
   line-height: 2em;
 }
 
+.footer-text-2 {
+  font-size: 17px;
+}
+
 .footerButton {
   line-height: 4em;
   background-color: #fbf1d4 !important;

@@ -7,7 +7,7 @@ class Footer extends React.Component {
     const url = 'https://github.com/ken-10';
     window.open(url, '_blank');
   }
-  
+
   siteRedirect2() {
     const url = 'https://github.com/jhunDomingo';
     window.open(url, '_blank');
@@ -26,8 +26,10 @@ class Footer extends React.Component {
             </div>
             <div className="footer-text">
               myDiver • University of Hawaiʻi at Mānoa • 2500 Campus Road • Honolulu, HI 96822<br/>
+              <div className="footer-text-2">
               DISCLAIMER: myDiver should not be used in any real life scenario. It is purely a software project for ICS
               414 at University of Hawaiʻi at Mānoa
+              </div>
             </div>
           </div>
         </footer>
