@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Header, Card, Image, Button, Container } from 'semantic-ui-react';
+import { Grid, Header, Image, Button, Container } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 
 class DefaultLanding extends React.Component {
