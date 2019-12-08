@@ -5,14 +5,6 @@ import { NavLink } from 'react-router-dom';
 class DefaultLanding extends React.Component {
 
   render() {
-    const style = {
-      background: '#FBF1D4',
-      paddingTop: '40px',
-      paddingBottom: '40px',
-      paddingLeft: '35px',
-      paddingRight: '35px',
-
-    };
 
     return (
 
@@ -70,6 +62,9 @@ class DefaultLanding extends React.Component {
                   <Grid.Column width={8} style={{ paddingLeft: 10 }}>
                     <Image src="/images/planner-page.png"/>
                   </Grid.Column>
+                </Grid.Row>
+                <Grid.Row style={{ paddingTop: 180 }}>
+                    <Button as={NavLink} exact to='/signup/'>Get started for free</Button>
                 </Grid.Row>
               </Grid>
             </div>
