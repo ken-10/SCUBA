@@ -230,11 +230,13 @@ class AddData extends React.Component {
     const date = dateObj.toLocaleString();
     const data = {
       date: date,
-      plan: this.state.plan
+      plan: this.state.plan,
     };
     Profiles.update(user._id, {
-      $push: { dives: data }
+      $push: { dives: data },
     });
+
+    window.location.reload();
   }
 
   clear() {
@@ -497,7 +499,10 @@ class AddData extends React.Component {
                   </Button>
                   <Button
                     style={{ paddingTop: 10 }}
-                    onClick={this.clear}
+                    onClick={() => {
+                      this.clear;
+                      window.location.reload();
+                    }}
                     floated="right"
                     color="red"
                     inverted

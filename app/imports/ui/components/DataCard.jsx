@@ -18,7 +18,7 @@ class DataCard extends React.Component {
 
   renderComponent() {
     return (
-      <Card>
+      <Card className="initial-dive-card" style={{ background: '#475f6f' }}>
         <h4>Starting Pressure Group: {this.props.pgi} </h4>
         <h4>Depth: {this.props.depth}</h4>
         <h4>Residual Nitrogen Time: {this.props.pressureGroup1}</h4>

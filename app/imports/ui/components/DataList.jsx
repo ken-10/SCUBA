@@ -52,7 +52,7 @@ class DataList extends React.Component {
 
       return (
         <Container>
-          <Segment padded>
+          <Segment padded style={{ background: '#475f6f' }}>
             <DataCard
               pgi={pgi}
               depth={depth}
